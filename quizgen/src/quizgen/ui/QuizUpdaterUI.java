@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -130,6 +131,7 @@ public class QuizUpdaterUI extends JFrame {
 			}
 			
 		});
+		loadButton.setMnemonic( KeyEvent.VK_L );
 		JButton addButton = new JButton( "Add" );
 		addButton.addActionListener( new ActionListener() {
 
@@ -139,6 +141,7 @@ public class QuizUpdaterUI extends JFrame {
 			}
 			
 		});
+		addButton.setMnemonic( KeyEvent.VK_A );
 		JButton deleteButton = new JButton( "Delete" );
 		deleteButton.addActionListener( new ActionListener() {
 
@@ -148,6 +151,7 @@ public class QuizUpdaterUI extends JFrame {
 			}
 			
 		});
+		deleteButton.setMnemonic( KeyEvent.VK_D );
 		JButton updateButton = new JButton( "Update" );
 		updateButton.addActionListener( new ActionListener() {
 
@@ -157,6 +161,7 @@ public class QuizUpdaterUI extends JFrame {
 			}
 			
 		});
+		updateButton.setMnemonic( KeyEvent.VK_U );
 		JButton clearButton = new JButton( "Clear" );
 		clearButton.addActionListener( new ActionListener() {
 
@@ -166,6 +171,7 @@ public class QuizUpdaterUI extends JFrame {
 			}
 			
 		});
+		clearButton.setMnemonic( KeyEvent.VK_C );
 		JButton closeButton = new JButton();
 		closeButton.setAction( new ExitAction() );
 		otherPanel.add( loadButton );
