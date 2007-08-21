@@ -9,6 +9,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -56,6 +58,26 @@ public class QuizGeneratorUI extends JFrame {
 	private JButton nextButton;
 	
 	private List<String> wrongAnswers;
+	
+	class EnterKeyListener extends KeyAdapter {
+
+		private JButton button;
+		
+		public EnterKeyListener( JButton button ) {
+			this.button = button;
+		}
+		
+		/* (non-Javadoc)
+		 * @see java.awt.event.KeyAdapter#keyPressed(java.awt.event.KeyEvent)
+		 */
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if ( e.getKeyCode() == KeyEvent.VK_ENTER ) {
+				button.doClick();
+			}
+		}
+		
+	}
 	
 	public QuizGeneratorUI() {
 		super( "Quiz Generator v.1" );
@@ -182,6 +204,7 @@ public class QuizGeneratorUI extends JFrame {
 		answerButtons = new LinkedHashMap<Character,JButton>();
 		for ( char c = FIRST_CHAR; c <= LAST_CHAR; c++ ) {
 			JButton answerButton = new JButton();
+			answerButton.setMnemonic( c );
 			answerButtons.put( c, answerButton );
 			answerPanel.add( answerButton );
 			answerButton.setHorizontalAlignment( JButton.LEFT );
@@ -194,6 +217,7 @@ public class QuizGeneratorUI extends JFrame {
 				}
 				
 			});
+			answerButton.addKeyListener( new EnterKeyListener( answerButton ) );
 		}
 		JPanel otherButtonPanel = new JPanel();
 		JButton newButton = new JButton( "New Quiz" );
@@ -205,6 +229,7 @@ public class QuizGeneratorUI extends JFrame {
 			}
 			
 		});
+		newButton.addKeyListener( new EnterKeyListener( newButton ) );
 		nextButton = new JButton( "Next Question" );
 		nextButton.addActionListener( new ActionListener() {
 
@@ -214,8 +239,10 @@ public class QuizGeneratorUI extends JFrame {
 			}
 			
 		});
+		nextButton.addKeyListener( new EnterKeyListener( nextButton ) );
 		JButton closeButton = new JButton();
 		closeButton.setAction( new ExitAction() );
+		closeButton.addKeyListener( new EnterKeyListener( closeButton ) );
 		otherButtonPanel.add( newButton );
 		otherButtonPanel.add( nextButton );
 		otherButtonPanel.add( closeButton );
@@ -244,7 +271,7 @@ public class QuizGeneratorUI extends JFrame {
 		
 		if ( questions.hasNext() ) {
 			nextButton.setEnabled( true );
-			nextButton.setSelected( true );
+			nextButton.requestFocusInWindow();
 		}
 	}
 	
