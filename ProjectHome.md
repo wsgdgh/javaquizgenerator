@@ -1,0 +1,1 @@
+A simple Java based multiple choice quiz generator.  Questions are stored in a MySQL database.
